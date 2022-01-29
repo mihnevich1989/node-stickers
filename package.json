@@ -10,7 +10,7 @@
     "dev": "nodemon app.js"
   },
   "keywords": [
-    "nodetodo",
+    "nodestickers",
     "nodejs",
     "todo"
   ],

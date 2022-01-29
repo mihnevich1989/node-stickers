@@ -47,6 +47,25 @@ router.get("/login", (req, res) => {
 // TODO: login user
 router.post('/login', async (req, res) => {
 	const { email, password } = req.body
+	const user = await User_model.findOne({ email: email.toLowerCase() })
+	if (!user) {
+		req.flash("message", "Username doesn't exist!")
+		return res.status(401).json({ result: false })
+	}
+	const areSame = await bcrypt.compare(password, user.password)
+	if (!areSame) {
+		req.flash("message", "Wrong login data!")
+		return res.status(401).json({ result: false })
+	}
+	req.session.user = user
+	req.session.isAuthenticated = true
+	req.session.save(err => {
+		if (err) {
+			throw err
+		}
+		res.redirect('/home')
+	})
+
 })
 
 

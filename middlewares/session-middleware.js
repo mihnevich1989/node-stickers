@@ -1,4 +1,7 @@
 module.exports = function (req, res, next) {
-    res.locals.isAuth = req.session.isAuthenticated
+    if (!req.session.isAuthenticated) {
+        return res.redirect('/auth/login')
+    }
+
     next()
 }

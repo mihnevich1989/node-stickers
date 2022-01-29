@@ -57,7 +57,7 @@ app.use(flash())
 
 //-----------------------use routes
 app.use('/auth', auth_router)
-app.use('/home', home_router)
+app.use('/home', authCheck, home_router)
 
 
 
