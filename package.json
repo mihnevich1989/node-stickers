@@ -4,6 +4,7 @@
   "description": "Проект туду на NodeJS",
   "main": "app.js",
   "type": "commonjs",
+  "git": "https: //github.com/mihnevich1989/node-stickers.git",
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon app.js"
