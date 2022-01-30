@@ -8,14 +8,16 @@ const config = require('config')
 const exhb = require('express-handlebars')
 const csrf = require('csurf')
 const flash = require('connect-flash')
+
 //----------middleware
 const authCheck = require('./middlewares/session-middleware')
 const var_middleware = require('./middlewares/variables-middleware')
 //----------end middleware
 
 //----------require routes
-const home_router = require('./routes/home/home-router')
+const mysticker_router = require('./routes/home/mysticker_router')
 const auth_router = require('./routes/auth/auth-router')
+const groups_router = require('./routes/groups/group-router');
 //----------end require routes
 
 const MongoStore = connectMongodbSession(session)
@@ -51,13 +53,14 @@ app.use(express.urlencoded({ extended: true }))
 app.use(express.json({ extended: true, }))
 app.use(flash())
 // app.use(csrf())
-// app.use(var_middleware)
+app.use(var_middleware)
 
 
 
 //-----------------------use routes
 app.use('/auth', auth_router)
-app.use('/home', authCheck, home_router)
+app.use('/my-stickers', authCheck, mysticker_router)
+app.use('/groups', authCheck, groups_router)
 
 
 

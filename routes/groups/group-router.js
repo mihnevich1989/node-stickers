@@ -2,9 +2,10 @@ const { Router } = require('express');
 const router = Router();
 
 router.get("/", (req, res) => {
-	res.render("home", {
-		title: "Главная страница Node-todo",
-		isHome: true,
+	res.render("groups", {
+		layout: "main",
+		title: "Group setting page",
+		isGroups: true,
 	});
 });
 

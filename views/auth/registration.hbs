@@ -1,3 +1,9 @@
+{{#if isAuth}}
+<div class="mb-3">
+	<p>You are authorized now!</p>
+	<a href="/my-stickers"></a>
+</div>
+{{else}}
 <div class="mb-3">
 	<label for="username" class="form-label">Username</label>
 	<input type="text" class="form-control" id="username" placeholder="Enter your username" name="username">
@@ -10,3 +16,4 @@
 	<label for="password" class="form-label">Password</label>
 	<input type="password" class="form-control" id="password" placeholder="Enter your password" name="password">
 </div>
+{{/if}}
