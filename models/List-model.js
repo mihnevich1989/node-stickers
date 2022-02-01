@@ -1,13 +1,13 @@
 const { Schema, model } = require('mongoose')
 
-const groupSchema = new Schema({
-	group_name: {
+const listSchema = new Schema({
+	category: {
 		type: String,
 		required: true,
 		minlength: 1,
 		maxlength: 25
 	},
-	group_data: {},
+	list_data: [String],
 	author: {
 		type: Schema.Types.ObjectId,
 		ref: 'User',
@@ -25,9 +25,9 @@ const groupSchema = new Schema({
 });
 
 //! add new date after update
-groupSchema.pre(["updateOne", "findOneAndUpdate","findByIdAndUpdate", "save"], function (next) {
+listSchema.pre(["updateOne", "findOneAndUpdate", "findByIdAndUpdate", "save"], function (next) {
 	this.updatedAt = Date.now()
 	next()
 })
 
-module.exports = model("Group", groupSchema)
+module.exports = model("List", listSchema)

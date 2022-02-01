@@ -68,7 +68,7 @@ app.use('/groups', authCheck, groups_router)
 
 //-----------------------start app with mongo connect
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || config.get("port");
 async function start() {
 	try {
 		await mongoose.connect(config.get("mongoUri"), {
@@ -78,8 +78,8 @@ async function start() {
 		app.listen(PORT, () =>
 			console.log(` Приложение запущено\. \n Server: http://localhost:${PORT} `)
 		);
-	} catch (e) {
-		console.log("Server error ", { error: e.message })
+	} catch (error) {
+		console.log("Server error ", { error: error.message })
 		process.exit(1)
 	}
 }
