@@ -4,10 +4,16 @@ const listSchema = new Schema({
 	category: {
 		type: String,
 		required: true,
+		unique: true,
 		minlength: 1,
 		maxlength: 25
 	},
-	list_data: [String],
+	list_data: [{
+		type: String,
+		required: true,
+		minlength: 1,
+		maxlength: 50
+	}],
 	author: {
 		type: Schema.Types.ObjectId,
 		ref: 'User',
@@ -24,8 +30,8 @@ const listSchema = new Schema({
 	}
 });
 
-//! add new date after update
-listSchema.pre(["updateOne", "findOneAndUpdate", "findByIdAndUpdate", "save"], function (next) {
+//! add new date before update
+listSchema.pre("save", function (next) {
 	this.updatedAt = Date.now()
 	next()
 })

@@ -37,4 +37,10 @@ const userSchema = new Schema({
 	resetTokenExp: Date,
 });
 
+//! add new date before update
+userSchema.pre("save", function (next) {
+	this.updatedAt = Date.now()
+	next()
+})
+
 module.exports = mongoose.model("User", userSchema)

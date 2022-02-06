@@ -22,8 +22,8 @@ const stickerSchema = new Schema({
 	}
 });
 
-//! add new date after update
-stickerSchema.pre(["updateOne", "findOneAndUpdate", "findByIdAndUpdate", "save"], function (next) {
+//! add new date before update
+stickerSchema.pre("save", function (next) {
 	this.updatedAt = Date.now()
 	next()
 })

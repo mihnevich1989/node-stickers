@@ -1,0 +1,18 @@
+{{#if lists.length}}
+<ul>
+	{{#each lists}}
+	{{#each this as |obj|}}
+	{{#if obj.category}}
+	<li data-categoryId="{{obj._id}}">{{obj.category}} <ul>
+			{{#each obj.list_data as | listItem |}}
+			<li>{{listItem}}</li>
+			{{/each}}
+		</ul>
+	</li>
+	{{/if}}
+	{{/each}}
+	{{/each}}
+</ul>
+{{else}}
+<p>List is empty</p>
+{{/if}}
