@@ -17,7 +17,7 @@ const var_middleware = require('./middlewares/variables-middleware')
 //----------require routes
 const auth_router = require('./routes/auth/auth-router')
 const mysticker_router = require('./routes/home/mysticker_router')
-const list_router = require('./routes/list/list-router');
+const template_router = require('./routes/template/template-router');
 //----------end require routes
 
 const MongoStore = connectMongodbSession(session)
@@ -60,7 +60,7 @@ app.use(var_middleware)
 //-----------------------use routes
 app.use('/auth', auth_router)
 app.use('/my-stickers', authCheck, mysticker_router)
-app.use('/list', authCheck, list_router)
+app.use('/templates', authCheck, template_router)
 
 
 

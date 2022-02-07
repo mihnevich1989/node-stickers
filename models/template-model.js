@@ -1,6 +1,6 @@
 const { Schema, model } = require('mongoose')
 
-const listSchema = new Schema({
+const templateSchema = new Schema({
 	category: {
 		type: String,
 		required: true,
@@ -31,9 +31,9 @@ const listSchema = new Schema({
 });
 
 //! add new date before update
-listSchema.pre("save", function (next) {
+templateSchema.pre("save", function (next) {
 	this.updatedAt = Date.now()
 	next()
 })
 
-module.exports = model("List", listSchema)
+module.exports = model("Template", templateSchema)

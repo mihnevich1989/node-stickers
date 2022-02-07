@@ -1,6 +1,6 @@
-{{#if lists.length}}
+{{#if templates.length}}
 <ul>
-	{{#each lists}}
+	{{#each templates}}
 	{{#each this as |obj|}}
 	{{#if obj.category}}
 	<li data-categoryId="{{obj._id}}">{{obj.category}} <ul>
@@ -14,5 +14,5 @@
 	{{/each}}
 </ul>
 {{else}}
-<p>List is empty</p>
+<p>Templates is empty</p>
 {{/if}}
