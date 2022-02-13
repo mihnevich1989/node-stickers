@@ -14,4 +14,7 @@ router.post('/', My_sticker_controller.my_stickers_page_post)
 // TODO: edit sticker
 router.put('/', My_sticker_controller.my_stickers_page_put)
 
+// TODO: delete sticker
+router.delete('/', My_sticker_controller.my_sticker_page_delete)
+
 module.exports = router;

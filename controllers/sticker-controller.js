@@ -51,6 +51,22 @@ class My_sticker_controller {
 		}
 	}
 
+	async my_sticker_page_delete(req, res) {
+		try {
+			const result_my_sticker_page_delete = await My_sticker_service.my_sticker_page_delete(req.query, req.session)
+			if (!result_my_sticker_page_delete.result) {
+				req.flash("message", result_my_sticker_page_delete.message)
+				return res.status(409).json({ result: result_my_sticker_page_delete.result, message: result_my_sticker_page_delete.message })
+			}
+			req.flash("message", result_my_sticker_page_delete.message)
+			res.redirect('/my-stickers')
+			// return res.status(201).json({ result: result_my_sticker_page_delete.result, message: result_my_sticker_page_delete.message })
+		} catch (error) {
+			res.status(500).json({ error: error.message })
+
+		}
+	}
+
 
 }
 

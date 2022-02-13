@@ -55,6 +55,12 @@ class My_sticker_service {
 		await edited_sticker.save()
 		return { result: true, message: `Sticker ${label} edited!`, stickerId: edited_sticker._id }
 	}
+	
+	async my_sticker_page_delete({id}, session) {
+		const isDeleted = await Sticker_model.deleteOne({ _id: id, author: session.user._id })
+		if (isDeleted.deletedCount === 0) return { result: false, message: "Sticker doesn't exist or you don't have access to delete!" }
+		return { result: true, message: "Sticker deleted!" }
+	}
 }
 
 module.exports = new My_sticker_service()

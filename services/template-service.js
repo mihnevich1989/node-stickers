@@ -54,8 +54,8 @@ class Template_service {
 
 	async template_page_delete({ listId }, session) {
 		const isDeleted = await Template_model.deleteOne({ _id: listId, author: session.user._id })
-		if (isDeleted.deletedCount === 0) return { result: false, message: "List doesn't exist or you don't have access to delete!" }
-		return { result: true, message: "List deleted!" }
+		if (isDeleted.deletedCount === 0) return { result: false, message: "Template doesn't exist or you don't have access to delete!" }
+		return { result: true, message: "Template deleted!" }
 	}
 
 }

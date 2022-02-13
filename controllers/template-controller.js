@@ -16,7 +16,7 @@ class Template_controller {
 			const result_template_edited_page = await Template_service.template_edited_page(req.query, req.session)
 			if (!result_template_edited_page.result) {
 				req.flash("message", result_template_edited_page.message)
-				return res.status(404).json({ result: false , message:" can't open template"})
+				return res.status(404).json({ result: false, message: " can't open template" })
 				// return res.redirect('/templates')
 			}
 			return res.render("edited-template", result_template_edited_page)
@@ -65,7 +65,8 @@ class Template_controller {
 				return res.status(409).json({ result: result_template_page_delete.result, message: result_template_page_delete.message })
 			}
 			req.flash("message", result_template_page_delete.message)
-			return res.status(201).json({ result: result_template_page_delete.result, message: result_template_page_delete.message })
+			res.redirect(`/templates`)
+			// return res.status(201).json({ result: result_template_page_delete.result, message: result_template_page_delete.message })
 		} catch (error) {
 			res.status(500).json({ error: error.message })
 		}
