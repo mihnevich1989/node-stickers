@@ -9,32 +9,36 @@ const exhb = require('express-handlebars')
 const csrf = require('csurf')
 const flash = require('connect-flash')
 
-//----------middleware
+//-----------------------middleware
 const authCheck = require('./middlewares/session-middleware')
 const var_middleware = require('./middlewares/variables-middleware')
-//----------end middleware
+//-----------------------end middleware
 
-//----------require routes
+//-----------------------require routes
 const auth_router = require('./routes/auth/auth-router')
-const mysticker_router = require('./routes/home/mysticker_router')
+const mysticker_router = require('./routes/home/mysticker-router')
 const template_router = require('./routes/template/template-router');
-//----------end require routes
+//-----------------------end require routes
 
 const MongoStore = connectMongodbSession(session)
 const app = express()
 app.use(helmet());
 
-//----------handlebars
+//-----------------------handlebars
 const hbs = exhb.create({
 	defaultLayout: 'main',
-	extname: 'hbs'
+	extname: 'hbs',
+	runtimeOptions: {
+		allowProtoPropertiesByDefault: true,
+		allowProtoMethodsByDefault: true
+	}
 })
 app.engine('hbs', hbs.engine)
 app.set('views', 'views')
 app.set('view engine', 'hbs')
-//-----------end handlebars
+//-----------------------end handlebars
 
-//----------init app store for mongo
+//-----------------------init app store for mongo
 const store = new MongoStore({
 	collection: "sessions",
 	uri: config.get("mongoUri"),

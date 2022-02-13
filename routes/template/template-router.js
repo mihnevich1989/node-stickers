@@ -5,6 +5,9 @@ const router = Router();
 // TODO: template page render
 router.get("/", Template_controller.template_page);
 
+// TODO: edited/created page render
+router.get('/edit', Template_controller.template_edited_page)
+
 // TODO: create template
 router.post("/", Template_controller.template_page_post)
 

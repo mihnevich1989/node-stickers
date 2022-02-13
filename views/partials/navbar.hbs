@@ -7,6 +7,7 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
+        {{!-- if user are loged in --}}
         {{#if isAuth}}
         {{#if isHome}}
         <li class="nav-item">
@@ -18,13 +19,13 @@
         </li>
         {{/if}}
 
-        {{#if isGroups}}
+        {{#if isTemplates}}
         <li class="nav-item">
-          <a class="nav-link active" href="/properties">Groups</a>
+          <a class="nav-link active" href="/templates">Templates</a>
         </li>
         {{else}}
         <li class="nav-item">
-          <a class="nav-link" href="/properties">Groups</a>
+          <a class="nav-link" href="/templates">Templates</a>
         </li>
         {{/if}}
         <li class="nav-item">
@@ -32,6 +33,7 @@
         </li>
         {{else}}
 
+        {{!-- else if user loged out --}}
         {{#if isLogin}}
         <li class="nav-item">
           <a class="nav-link active" href="/auth/login">Log in</a>

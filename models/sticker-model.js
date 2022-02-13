@@ -1,11 +1,23 @@
 const { Schema, model } = require('mongoose')
 
 const stickerSchema = new Schema({
-	group: {
-		type: Schema.Types.ObjectId,
-		ref: 'Group'
+	label: {
+		type: String,
+		required: true,
+		minlength: 1,
+		maxlength: 15
 	},
-	notes: [String],
+	templates: [{
+		type: Schema.Types.ObjectId,
+		ref: 'Template'
+	}],
+	data: {},
+	notes: String,
+	author: {
+		type: Schema.Types.ObjectId,
+		ref: 'User',
+		required: true
+	},
 	createdAt: {
 		type: Date,
 		default: () => Date.now(),
@@ -14,11 +26,6 @@ const stickerSchema = new Schema({
 	updatedAt: {
 		type: Date,
 		default: () => Date.now()
-	},
-	author: {
-		type: Schema.Types.ObjectId,
-		ref: 'User',
-		required: true
 	}
 });
 

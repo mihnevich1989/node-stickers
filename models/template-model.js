@@ -4,7 +4,6 @@ const templateSchema = new Schema({
 	category: {
 		type: String,
 		required: true,
-		unique: true,
 		minlength: 1,
 		maxlength: 25
 	},

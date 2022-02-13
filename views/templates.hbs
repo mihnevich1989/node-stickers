@@ -1,16 +1,13 @@
 {{#if templates.length}}
 <ul>
 	{{#each templates}}
-	{{#each this as |obj|}}
-	{{#if obj.category}}
-	<li data-categoryId="{{obj._id}}">{{obj.category}} <ul>
-			{{#each obj.list_data as | listItem |}}
-			<li>{{listItem}}</li>
+	<li data-templateId="{{_id}}">{{category}}
+		<ul>
+			{{#each list_data as |data| }}
+			<li>{{data}}</li>
 			{{/each}}
 		</ul>
 	</li>
-	{{/if}}
-	{{/each}}
 	{{/each}}
 </ul>
 {{else}}

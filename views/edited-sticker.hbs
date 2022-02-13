@@ -1,0 +1,19 @@
+{{#if isSticker}}
+<div data-stickerId="{{stickerId}}">
+	<input type="text" value="{{label}}"> / <i>{{date}}</i>
+	<hr>
+	<ol>{{#each data}}
+		<li>{{@key}}:
+			<ul>
+				{{#each this as |node|}}
+				<li><input type="text" value="{{node}}"></li><br>
+				{{/each}}
+			</ul>
+		</li>
+		{{/each}}
+	</ol>
+
+</div>
+{{else}}
+<p>Access denied!</p>
+{{/if}}

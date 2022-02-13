@@ -1,0 +1,10 @@
+<div data-templateId="{{templateId}}">
+	<h3>Category</h3>
+	<input type="text" value="{{category}}">
+	<hr>
+	<ol>List:
+		{{#each data}}
+		<li><input type="text" value="{{this}}"></li><br>
+		{{/each}}
+	</ol>
+</div>
