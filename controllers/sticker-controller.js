@@ -4,7 +4,7 @@ class My_sticker_controller {
 	async my_sticker_page(req, res) {
 		try {
 			const result_my_sticker_page = await My_sticker_service.my_sticker_page(req.session)
-			return res.render("my-stickers", result_my_sticker_page)
+			return res.render("mystickers/my-stickers", result_my_sticker_page)
 		} catch (error) {
 			res.status(500).json({ error: error.message })
 		}
@@ -17,7 +17,7 @@ class My_sticker_controller {
 				req.flash("message", result_my_sticker_page_edited.message)
 				return res.status(404).json({ result: false, message: " can't open sticker" })
 			}
-			return res.render("edited-sticker", result_my_sticker_page_edited)
+			return res.render("mystickers/edited-sticker", result_my_sticker_page_edited)
 		} catch (error) {
 			res.status(500).json({ error: error.message })
 		}

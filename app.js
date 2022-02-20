@@ -50,7 +50,8 @@ app.use(session({
 	store: store,
 	cookie: { maxAge: 1000 * 60 * 60 * 24, },
 }));
-app.use(express.static('public'))
+
+app.use(express.static(__dirname + '/public'))
 app.use('/css', express.static(__dirname + '/node_modules/bootstrap/dist/css')); //add npm i bootstrap and this is line to allow and enable use css styles <link rel="stylesheet" href="/css/bootstrap.min.css">
 app.use('/js', express.static(__dirname + '/node_modules/bootstrap/dist/js')); //add npm i bootstrap and this is line to allow and enable use js <script src="/js/bootstrap.min.js"></script>
 app.use(express.urlencoded({ extended: true }))
@@ -61,10 +62,22 @@ app.use(var_middleware)
 
 
 
+
 //-----------------------use routes
 app.use('/auth', auth_router)
 app.use('/my-stickers', authCheck, mysticker_router)
 app.use('/templates', authCheck, template_router)
+// custom 404 page
+app.use((req, res) => {
+	res.status(404)
+	res.render('404')
+})
+// custom 500 page
+app.use((err, req, res, next) => {
+	console.error(err.message)
+	res.status(500)
+	res.render('500')
+})
 
 
 

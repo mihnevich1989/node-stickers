@@ -5,7 +5,7 @@ class Template_controller {
 	async template_page(req, res) {
 		try {
 			const result_template_page = await Template_service.template_page(req.session)
-			return res.render("templates", result_template_page)
+			return res.render("templates/templates", result_template_page)
 		} catch (error) {
 			res.status(500).json({ error: error.message })
 		}
@@ -19,7 +19,7 @@ class Template_controller {
 				return res.status(404).json({ result: false, message: " can't open template" })
 				// return res.redirect('/templates')
 			}
-			return res.render("edited-template", result_template_edited_page)
+			return res.render("templates/edited-template", result_template_edited_page)
 		} catch (error) {
 			res.status(500).json({ error: error.message })
 		}
