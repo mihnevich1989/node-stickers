@@ -18,6 +18,7 @@ const var_middleware = require('./middlewares/variables-middleware')
 const auth_router = require('./routes/auth/auth-router')
 const mysticker_router = require('./routes/home/mysticker-router')
 const template_router = require('./routes/template/template-router');
+const handlers_controller = require('./controllers/handlers-controller')
 //-----------------------end require routes
 
 const MongoStore = connectMongodbSession(session)
@@ -68,16 +69,9 @@ app.use('/auth', auth_router)
 app.use('/my-stickers', authCheck, mysticker_router)
 app.use('/templates', authCheck, template_router)
 // custom 404 page
-app.use((req, res) => {
-	res.status(404)
-	res.render('404')
-})
+app.use(handlers_controller.not_found)
 // custom 500 page
-app.use((err, req, res, next) => {
-	console.error(err.message)
-	res.status(500)
-	res.render('500')
-})
+app.use(handlers_controller.not_found)
 
 
 
