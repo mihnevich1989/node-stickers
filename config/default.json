@@ -1,5 +1,5 @@
 {
 	"secret": "secretValue123",
-	"mongoUri": "mongodb+srv://mihnevich:19mihnevich89@cluster0.skkvo.mongodb.net/FB?retryWrites=true&w=majority",
+	"mongoUri": "mongodb+srv://mihnevich:19mihnevich89@nodejs-stickers-cluster.u7ycj.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
 	"port": 5000
 }
