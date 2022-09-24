@@ -3,7 +3,7 @@ const Template_controller = require('../../controllers/template-controller')
 const router = Router();
 
 // TODO: template page render
-router.get("/", Template_controller.template_page);
+router.get("/", Template_controller.template_page_render);
 
 // TODO: edited/created page render
 router.get('/edit', Template_controller.template_edited_page)
