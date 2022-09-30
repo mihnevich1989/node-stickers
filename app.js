@@ -9,22 +9,26 @@ const exhb = require('express-handlebars');
 const csrf = require('csurf');
 const flash = require('connect-flash');
 
+
 //-----------------------middleware
 const authCheck = require('./middlewares/session-middleware');
 const var_middleware = require('./middlewares/variables-middleware');
 const cors_middleware = require('./middlewares/cors-middleware');
 //-----------------------end middleware
 
+
 //-----------------------require routes
 const auth_router = require('./routes/auth/auth-router');
-const mysticker_router = require('./routes/home/mysticker-router');
+const mysticker_router = require('./routes/sticker/mysticker-router');
 const template_router = require('./routes/template/template-router');
 const handlers_controller = require('./controllers/handlers-controller');
 //-----------------------end require routes
 
+
 const MongoStore = connectMongodbSession(session);
 const app = express();
 app.use(helmet());
+
 
 //-----------------------handlebars
 const hbs = exhb.create({
@@ -39,6 +43,7 @@ app.engine('hbs', hbs.engine);
 app.set('views', 'views');
 app.set('view engine', 'hbs');
 //-----------------------end handlebars
+
 
 //-----------------------init app store for mongo
 const store = new MongoStore({
@@ -55,6 +60,7 @@ app.use(session({
 	secure: true
 }));
 
+
 app.use(express.static(__dirname + '/public'));
 app.use('/css', express.static(__dirname + '/node_modules/bootstrap/dist/css')); //add npm i bootstrap and this is line to allow and enable use css styles <link rel="stylesheet" href="/css/bootstrap.min.css">
 app.use('/js', express.static(__dirname + '/node_modules/bootstrap/dist/js')); //add npm i bootstrap and this is line to allow and enable use js <script src="/js/bootstrap.min.js"></script>
@@ -64,7 +70,6 @@ app.use(flash());
 // app.use(csrf())
 app.use(var_middleware);
 app.use(cors_middleware);
-
 
 
 //-----------------------use routes
@@ -78,11 +83,7 @@ app.use(handlers_controller.not_found);
 app.use(handlers_controller.not_found);
 
 
-
-
-
 //-----------------------start app with mongo connect
-
 const PORT = process.env.PORT || config.get("port");
 async function start() {
 	try {

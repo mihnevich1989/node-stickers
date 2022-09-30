@@ -23,6 +23,16 @@ class My_sticker_controller {
     }
   }
 
+  async new_sticker_page_render(req, res) {
+    try {
+      const result_new_sticker_page_render = await My_sticker_service.new_sticker_page_render(req.session);
+      return res.render("mystickers/new-sticker", result_new_sticker_page_render);
+
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  }
+
   async my_stickers_page_post(req, res) {
     try {
       const result_my_stickers_page_post = await My_sticker_service.my_stickers_page_post(req.body, req.session);

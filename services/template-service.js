@@ -4,7 +4,7 @@ const Template_model = require('../models/template-model');
 class Template_service {
 
   async template_page(session) {
-    const templates = await Template_model.find({ author: session.user._id });
+    const templates = await Template_model.find({ author: session.user._id }).sort({ createdAt: -1 });
     return {
       layout: "main",
       title: "Templates page",

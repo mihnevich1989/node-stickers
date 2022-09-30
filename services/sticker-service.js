@@ -3,7 +3,7 @@ const moment = require('moment');
 
 class My_sticker_service {
   async my_sticker_page(session) {
-    const all_stickers = await Sticker_model.find({ author: session.user._id }, { _id: 1, createdAt: 1, label: 1 });
+    const all_stickers = await Sticker_model.find({ author: session.user._id }, { _id: 1, createdAt: 1, label: 1 }).sort({ createdAt: -1 });
     const stickers = all_stickers.map(el => { return { label: el.label, id: el._id.toString(), date: moment(el.createdAt).format("LL") }; });
 
     return {
@@ -28,6 +28,15 @@ class My_sticker_service {
       notes: [...sticker.notes],
       date: moment(sticker.createdAt).format('LL'),
       isSticker: true
+    };
+  }
+
+  async new_sticker_page_render() {
+    return {
+      result: true,
+      layout: "main",
+      title: "Create new sticker page",
+      isNewSticker: true
     };
   }
 

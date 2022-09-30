@@ -1,10 +1,10 @@
 
 class Handlers_controller {
   not_found(req, res) {
-    res.render('404');
+    res.status(404).render('404', { title: '404: Not Found' });
   }
   server_error(err, req, res, next) {
-    res.render('500');
+    res.status(500).render('500', { title: '500: Internal Server Error', error: err });
   }
 }
 

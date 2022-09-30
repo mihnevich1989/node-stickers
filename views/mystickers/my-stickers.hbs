@@ -1,13 +1,17 @@
-<div>
-  <button><b>+</b></button>
+<div class="new-sticker container mb-3 mt-3">
+  <a href="/my-stickers/create" id="addNewSticker" type="button" class="btn btn-info">Add Sticker</a>
 </div>
-<div>
+
+<div class="container grid text-center">
   {{#if stickers.length}}
-  <ul>
-    {{#each stickers}}
-    <li data-stickerId="{{id}}">{{label}} / {{date}}</li>
-    {{/each}}
-  </ul>
+  {{#each stickers}}
+  <div data-stickerId="{{id}}" class="card text-bg-warning mb-3">
+    <h5 class="card-header">{{date}}</h5>
+    <div class="card-body bg-light">
+      <p class="card-title">{{label}}</p>
+    </div>
+  </div>
+  {{/each}}
   {{else}}
   <p>Stickers is empty</p>
   {{/if}}

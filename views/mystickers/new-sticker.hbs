@@ -1,0 +1,23 @@
+<div class="data-group">
+  <div class="input-group mb-1">
+    <span class="input-group-text">Ex.</span>
+    <input type="text" aria-label="exercise" name="exercise" class="form-control add-ex" required>
+  </div>
+  <ul class="list-repetition">
+    <li>
+      <div class="input-group input-group-sm mb-1">
+        <span class="input-group-text">Wg.</span>
+        <input type="number" aria-label="weight" name="weight" class="form-control add-wg" required>
+        <span class="input-group-text">Rep.</span>
+        <input type="number" aria-label="repetitions" name="repetitions" class="form-control add-rep" required>
+      </div>
+    </li>
+    <button class="btn btn-outline-secondary add-repetition">+</button>
+  </ul>
+</div>
+
+<div class="btn-group mt-5 btn-add-save-close" role="group">
+  <button id="add-exercise" type="button" class="btn btn-outline-primary btn-lg">Add exercise</button>
+  <button id="save-sticker" type="button" class="btn btn-outline-success btn-lg">Save sticker</button>
+  <button id="close-sticker" type="button" class="btn btn-outline-danger btn-lg">Close</button>
+</div>

@@ -1,15 +1,22 @@
-{{#if templates.length}}
-<ul>
+<div class="new-template container mb-3 mt-3">
+	<button type="button" class="btn btn-info">Add Template</button>
+</div>
+<div class="container grid">
+	{{#if templates.length}}
 	{{#each templates}}
-	<li data-templateId="{{_id}}">{{category}}
-		<ul>
-			{{#each list_data as |data| }}
-			<li>{{data}}</li>
-			{{/each}}
-		</ul>
-	</li>
+	<div data-templateId="{{_id}}" class="card text-bg-light mb-3">
+		<h5 class="card-header text-center">{{category}}</h5>
+		<div class="card-body">
+			<ul>
+				{{#each list_data as |data| }}
+				<li>{{data}}</li>
+				{{/each}}
+			</ul>
+			<p class="card-title">{{label}}</p>
+		</div>
+	</div>
 	{{/each}}
-</ul>
-{{else}}
-<p>Templates is empty</p>
-{{/if}}
+	{{else}}
+	<p>Templates is empty</p>
+	{{/if}}
+</div>
