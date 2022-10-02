@@ -3,8 +3,8 @@ const moment = require('moment');
 
 class My_sticker_service {
   async my_sticker_page(session) {
-    const all_stickers = await Sticker_model.find({ author: session.user._id }, { _id: 1, createdAt: 1, label: 1 }).sort({ createdAt: -1 });
-    const stickers = all_stickers.map(el => { return { label: el.label, id: el._id.toString(), date: moment(el.createdAt).format("LL") }; });
+    const all_stickers = await Sticker_model.find({ author: session.user._id }, { _id: 1, createdAt: 1, header: 1 }).sort({ createdAt: -1 });
+    const stickers = all_stickers.map(el => { return { header: el.header, id: el._id.toString(), date: moment(el.createdAt).format("LL") }; });
 
     return {
       result: true,
@@ -23,7 +23,7 @@ class My_sticker_service {
       layout: "main",
       title: "Editing sticker page",
       stickerId: sticker._id,
-      label: sticker.label,
+      header: sticker.header,
       data: sticker.data,
       notes: [...sticker.notes],
       date: moment(sticker.createdAt).format('LL'),
@@ -40,28 +40,26 @@ class My_sticker_service {
     };
   }
 
-  async my_stickers_page_post({ label, templates, data, notes }, session) {
-    if (!label) return { result: false, message: "Label can't be empty" };
+  async my_stickers_page_post({ header, data, notes }, session) {
+    if (!header) return { result: false, message: "Header can't be empty" };
     const new_sticker = new Sticker_model({
-      label,
-      templates,
+      header,
       data,
       notes,
       author: session.user._id
     });
     await new_sticker.save();
-    return { result: true, message: `Sticker ${label} created!`, stickerId: new_sticker._id };
+    return { result: true, message: `Sticker ${header} created!`, stickerId: new_sticker._id };
   }
 
-  async my_stickers_page_put({ label, templates, data, notes }, { id }, session) {
-    if (!label) return { result: false, message: "Label can't be empty" };
+  async my_stickers_page_put({ header, data, notes }, { id }, session) {
+    if (!header) return { result: false, message: "Header can't be empty" };
     const edited_sticker = await Sticker_model.findOne({ _id: id, author: session.user._id });
-    edited_sticker.label = label;
-    edited_sticker.templates = [...templates];
+    edited_sticker.header = header;
     edited_sticker.data = data;
     edited_sticker.notes = notes;
     await edited_sticker.save();
-    return { result: true, message: `Sticker ${label} edited!`, stickerId: edited_sticker._id };
+    return { result: true, message: `Sticker ${header} edited!`, stickerId: edited_sticker._id };
   }
 
   async my_sticker_page_delete({ id }, session) {

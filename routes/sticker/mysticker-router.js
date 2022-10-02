@@ -5,14 +5,14 @@ const router = Router();
 // TODO: stickers page render
 router.get("/", My_sticker_controller.my_sticker_page)
 
-// TODO: sticker edit page render
-router.get('/edit', My_sticker_controller.my_sticker_page_edited)
-
 // TODO: create page render
 router.get('/create', My_sticker_controller.new_sticker_page_render)
 
 // TODO: create sticker
 router.post('/create', My_sticker_controller.my_stickers_page_post)
+
+// TODO: sticker edit page render
+router.get('/edit', My_sticker_controller.my_sticker_page_edited)
 
 // TODO: edit sticker
 router.put('/edit', My_sticker_controller.my_stickers_page_put)

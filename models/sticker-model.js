@@ -1,7 +1,7 @@
 const { Schema, model } = require('mongoose')
 
 const stickerSchema = new Schema({
-	label: {
+	header: {
 		type: String,
 		required: true,
 		minlength: 1,

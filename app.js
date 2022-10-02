@@ -64,8 +64,8 @@ app.use(session({
 app.use(express.static(__dirname + '/public'));
 app.use('/css', express.static(__dirname + '/node_modules/bootstrap/dist/css')); //add npm i bootstrap and this is line to allow and enable use css styles <link rel="stylesheet" href="/css/bootstrap.min.css">
 app.use('/js', express.static(__dirname + '/node_modules/bootstrap/dist/js')); //add npm i bootstrap and this is line to allow and enable use js <script src="/js/bootstrap.min.js"></script>
+app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.json({ extended: true, }));
 app.use(flash());
 // app.use(csrf())
 app.use(var_middleware);

@@ -98,6 +98,7 @@ window.onload = function () {
       const dataGroups = document.querySelectorAll('.data-group');
       const validStatusForAllInputs = document.querySelectorAll('.is-invalid');
       const toastLiveExample = document.getElementById('liveToast');
+      const header = document.querySelector('.add-header').value;
 
       if (validStatusForAllInputs.length > 0) {
         const toast = new bootstrap.Toast(toastLiveExample);
@@ -106,29 +107,40 @@ window.onload = function () {
 
       dataGroups.forEach((el, i) => {
         const exercise = el.querySelector('input[name="exercise"]').value;
-        dataExercise[`${exercise} -${i}`] = { weight: [], repetitions: [] };
+        dataExercise[`${exercise} (${i + 1})`] = { weight: [], repetitions: [] };
         el.querySelectorAll('.list-repetition li .input-group').forEach(listElem => {
-          dataExercise[`${exercise} -${i}`].weight.push(listElem.querySelector('input[name="weight"]').value);
-          dataExercise[`${exercise} -${i}`].repetitions.push(listElem.querySelector('input[name="repetitions"]').value);
+          dataExercise[`${exercise} (${i + 1})`].weight.push(listElem.querySelector('input[name="weight"]').value);
+          dataExercise[`${exercise} (${i + 1})`].repetitions.push(listElem.querySelector('input[name="repetitions"]').value);
         });
       });
 
-      console.log(dataExercise);
+      let data = {
+        header,
+        data: dataExercise
+      };
+
+      fetch('/my-stickers/create', {
+        method: 'post',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      }).then(res => {
+        return res.json();
+      }).then(res => {
+        if (res.result) {
+          window.location.assign(`${res.path}`);
+        }
+      });
     });
     //end---fetch
 
 
 
 
-
-
-
   }
   //end---my-sticker/create
-
-
-
-
 
 
 
