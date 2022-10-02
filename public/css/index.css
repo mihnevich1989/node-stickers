@@ -1,3 +1,17 @@
+#logo {
+  text-decoration: none;
+  color: #adb5bd;
+}
+
+#logo:hover {
+  transition: all 0.3s ease-in-out;
+  color: #76787a;
+}
+
+.navbar-nav .nav-link.active {
+  font-weight: bold;
+}
+
 .form-control.is-valid:focus,
 .was-validated .form-control:valid:focus {
   box-shadow: none;
