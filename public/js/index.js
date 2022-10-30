@@ -7,6 +7,9 @@ window.onload = function () {
 
   //---my-sticker/create
   if (window.location.pathname === '/my-stickers/create') {
+    const btnAddSaveClose = document.querySelector('.btn-add-save-close');
+    const addExercise = document.querySelector('#add-exercise');
+    const save = document.querySelector('#save-sticker');
 
     const inputsGroupRepetition = `
     <li class="position-relative">
@@ -64,32 +67,31 @@ window.onload = function () {
     addValidation();
     //end---validation class
 
-    //---add weight and repetiotion
+    //---add note
     function addEventToNextRepetition(allBtns) {
       allBtns[allBtns.length - 1].addEventListener('click', (e) => {
         e.target.insertAdjacentHTML('beforeBegin', inputsGroupRepetition);
         addValidation(); //---add validation class
         trash(); //---trash
+        btnAddSaveClose.scrollIntoView();
       });
     }
     let addRepetition = document.querySelectorAll('.add-repetition');
     addEventToNextRepetition(addRepetition);
-    //end---weight and repetiotion
+    //end---note
 
     //---add exercise
-    const btnAddSaveClose = document.querySelector('.btn-add-save-close');
-    const addExercise = document.querySelector('#add-exercise');
     addExercise.addEventListener('click', () => {
       btnAddSaveClose.insertAdjacentHTML('beforeBegin', exercise);
       addRepetition = document.querySelectorAll('.add-repetition');
-      addEventToNextRepetition(addRepetition); //---add weight and repetiotion
+      addEventToNextRepetition(addRepetition); //---add note
       addValidation(); //---add validation class
       trash(); //---trash
+      btnAddSaveClose.scrollIntoView();
     });
     //end---exercise
 
     //---fetch with data
-    const save = document.querySelector('#save-sticker');
     let dataExercise = {};
 
     save.addEventListener('click', () => {
@@ -108,7 +110,6 @@ window.onload = function () {
         dataExercise[`${exercise} (${i + 1})`] = { note: [] };
         el.querySelectorAll('.list-repetition li .input-group').forEach(listElem => {
           dataExercise[`${exercise} (${i + 1})`].note.push(listElem.querySelector('input[name="note"]').value);
-          listElem.scrollIntoView();
         });
       });
 
