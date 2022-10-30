@@ -5,20 +5,19 @@
 <div class="container grid text-center">
   {{#if stickers.length}}
   {{#each stickers}}
-  <div data-stickerId="{{id}}" class="card text-bg-warning mb-3">
+  <div class="card text-bg-warning mb-3 sticker-card">
+    <span data-stickerid="{{id}}" type="button"
+      class='sticker-trash btn btn-outline-secondary border-0 bi bi-trash'></span>
     <h5 class="card-header">{{date}}</h5>
     <div class="card-body bg-light">
       <p class="card-title">{{header}}</p>
       {{#each data}}
-      <p class="text-start">{{@key}}</p>
-      {{!-- {{#each this as |node|}}
-      <li><input type="text" value="{{node}}" disabled>&nbsp;</li><br>
-      {{/each}} --}}
-      <ul class="list-unstyled text-start">
-        {{#each reps }}
-        <li> Reps. - {{reps}}</li>
+      <p class="text-start m-1">{{@key}}</p>
+      {{!-- <ul class="list-unstyled text-start">
+        {{#each note }}
+        <li>Note - {{@this}}</li>
         {{/each}}
-      </ul>
+      </ul> --}}
       {{/each}}
     </div>
   </div>

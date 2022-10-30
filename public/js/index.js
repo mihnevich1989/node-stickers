@@ -2,7 +2,23 @@ window.onload = function () {
 
   //---my-stickers page
   if (window.location.pathname === '/my-stickers') {
-  }
+    //---delete sticker
+    const stickersTrash = document.querySelectorAll('.sticker-trash');
+    stickersTrash.forEach(sticker => {
+      sticker.addEventListener('click', (e) => {
+        const target = e.target;
+        fetch(`/my-stickers/delete?id=${target.dataset.stickerid}`, {
+          method: 'delete'
+        }).then(res => {
+          return res.json();
+        }).then(res => {
+          if (res.result) {
+            target.parentElement.remove();  
+          }
+        });
+      });
+    });
+  };
   //end---my-stickers page
 
   //---my-sticker/create
@@ -13,7 +29,7 @@ window.onload = function () {
 
     const inputsGroupRepetition = `
     <li class="position-relative">
-      <span type="button" class='trash btn btn-outline-secondary border-0 bi bi-file-earmark-minus'>
+      <span type="button" class='trash-minus btn btn-outline-secondary border-0 bi bi-file-earmark-minus'>
       </span>
       <div class="input-group input-group-sm mb-1">
         <span class="input-group-text">Note</span>
@@ -27,14 +43,14 @@ window.onload = function () {
         <span class="input-group-text">Ex.</span>
         <input type="text" aria-label="exercise" name="exercise" class="check-valid form-control add-ex is-invalid" required>
       </div>
-      <ul class="list-repetition">
-        <button class="btn btn-outline-secondary add-repetition border-0 bi bi-file-earmark-plus"></button>
+      <ul class="list-note">
+        <button class="btn btn-outline-secondary add-note border-0 bi bi-file-earmark-plus"></button>
       </ul>
     </div>`;
 
     //---trash
     function trash() {
-      const trashBtns = document.querySelectorAll('.trash');
+      const trashBtns = document.querySelectorAll('.trash-minus');
 
       trashBtns.forEach(btn => {
         btn.addEventListener('click', (e) => {
@@ -76,14 +92,14 @@ window.onload = function () {
         btnAddSaveClose.scrollIntoView();
       });
     }
-    let addRepetition = document.querySelectorAll('.add-repetition');
+    let addRepetition = document.querySelectorAll('.add-note');
     addEventToNextRepetition(addRepetition);
     //end---note
 
     //---add exercise
     addExercise.addEventListener('click', () => {
       btnAddSaveClose.insertAdjacentHTML('beforeBegin', exercise);
-      addRepetition = document.querySelectorAll('.add-repetition');
+      addRepetition = document.querySelectorAll('.add-note');
       addEventToNextRepetition(addRepetition); //---add note
       addValidation(); //---add validation class
       trash(); //---trash
@@ -94,21 +110,36 @@ window.onload = function () {
     //---fetch with data
     let dataExercise = {};
 
-    save.addEventListener('click', () => {
+    save.addEventListener('click', (e) => {
       const dataGroups = document.querySelectorAll('.data-group');
       const validStatusForAllInputs = document.querySelectorAll('.is-invalid');
-      const toastLiveExample = document.getElementById('liveToast');
       const header = document.querySelector('.add-header').value;
 
       if (validStatusForAllInputs.length > 0) {
+        const toastBlock = `
+        <div id="liveToast" class="w-50 toast align-items-center text-bg-danger position-absolute border-0 start-50 translate-middle-x "
+            role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="1500">
+            <div class="d-flex justify-content-center content">
+              <div class="toast-body ">
+                Fill in all the fields!
+              </div>
+            </div>
+        </div>
+      `;
+        e.target.insertAdjacentHTML('afterend', toastBlock);
+        const toastLiveExample = document.getElementById('liveToast');
         const toast = new bootstrap.Toast(toastLiveExample);
-        return toast.show();
+        toast.show();
+        setTimeout(() => {
+          toastLiveExample.remove();
+        }, 1500);
+        return;
       }
 
       dataGroups.forEach((el, i) => {
         const exercise = el.querySelector('input[name="exercise"]').value;
         dataExercise[`${exercise} (${i + 1})`] = { note: [] };
-        el.querySelectorAll('.list-repetition li .input-group').forEach(listElem => {
+        el.querySelectorAll('.list-note li .input-group').forEach(listElem => {
           dataExercise[`${exercise} (${i + 1})`].note.push(listElem.querySelector('input[name="note"]').value);
         });
       });
@@ -134,10 +165,6 @@ window.onload = function () {
       });
     });
     //end---fetch
-
-
-
-
   }
   //end---my-sticker/create
 

@@ -5,7 +5,6 @@ class My_sticker_service {
   async my_sticker_page(session) {
     const all_stickers = await Sticker_model.find({ author: session.user._id }, { _id: 1, createdAt: 1, header: 1, data: 1 }).sort({ createdAt: -1 });
     const stickers = all_stickers.map(el => { return { header: el.header, id: el._id.toString(), date: moment(el.createdAt).format("LL"), data: el.data }; });
-    console.log(stickers);
     return {
       result: true,
       layout: "main",
