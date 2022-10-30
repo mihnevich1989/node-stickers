@@ -13,10 +13,8 @@ window.onload = function () {
       <span type="button" class='trash btn btn-outline-secondary border-0 bi bi-file-earmark-minus'>
       </span>
       <div class="input-group input-group-sm mb-1">
-        <span class="input-group-text">W</span>
-        <input type="number" aria-label="weight" name="weight" class="check-valid form-control add-wg is-invalid" required>
-        <span class="input-group-text">R</span>
-        <input type="number" aria-label="repetitions" name="repetitions" class="check-valid form-control add-rep is-invalid" required>
+        <span class="input-group-text">Note</span>
+        <input type="text" aria-label="note" name="note" class="check-valid form-control add-note is-invalid" required>
       </div>
     </li>`;
 
@@ -107,10 +105,10 @@ window.onload = function () {
 
       dataGroups.forEach((el, i) => {
         const exercise = el.querySelector('input[name="exercise"]').value;
-        dataExercise[`${exercise} (${i + 1})`] = { weight: [], repetitions: [] };
+        dataExercise[`${exercise} (${i + 1})`] = { note: [] };
         el.querySelectorAll('.list-repetition li .input-group').forEach(listElem => {
-          dataExercise[`${exercise} (${i + 1})`].weight.push(listElem.querySelector('input[name="weight"]').value);
-          dataExercise[`${exercise} (${i + 1})`].repetitions.push(listElem.querySelector('input[name="repetitions"]').value);
+          dataExercise[`${exercise} (${i + 1})`].note.push(listElem.querySelector('input[name="note"]').value);
+          listElem.scrollIntoView();
         });
       });
 

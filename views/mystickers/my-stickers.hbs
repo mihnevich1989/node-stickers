@@ -1,4 +1,4 @@
-<div class="new-sticker container mb-3 mt-3 d-flex" >
+<div class="new-sticker container mb-3 mt-3 d-flex">
   <a href="/my-stickers/create" id="addNewSticker" type="button" class="bi bi-plus-square"></a>
 </div>
 
@@ -9,6 +9,17 @@
     <h5 class="card-header">{{date}}</h5>
     <div class="card-body bg-light">
       <p class="card-title">{{header}}</p>
+      {{#each data}}
+      <p class="text-start">{{@key}}</p>
+      {{!-- {{#each this as |node|}}
+      <li><input type="text" value="{{node}}" disabled>&nbsp;</li><br>
+      {{/each}} --}}
+      <ul class="list-unstyled text-start">
+        {{#each reps }}
+        <li> Reps. - {{reps}}</li>
+        {{/each}}
+      </ul>
+      {{/each}}
     </div>
   </div>
   {{/each}}
