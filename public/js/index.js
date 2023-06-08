@@ -7,15 +7,16 @@ window.onload = function () {
     stickersTrash.forEach(sticker => {
       sticker.addEventListener('click', (e) => {
         const target = e.target;
-        fetch(`/my-stickers/delete?id=${target.dataset.stickerid}`, {
+        const stickerId = target.parentNode.dataset.stickerid;
+        fetch(`/my-stickers/delete?id=${stickerId}`, {
           method: 'delete'
-        }).then(res => {
-          return res.json();
-        }).then(res => {
-          if (res.result) {
-            target.parentElement.remove();
-          }
-        });
+        }).then(res => res.json())
+          .then(res => res.result ? target.parentElement.remove() : console.log("Can't delete!"))
+          .then(() => {
+            if (document.querySelectorAll('.sticker-trash').length == 0) {
+              window.location.href = '/my-stickers';
+            }
+          });
       });
     });
   };
@@ -24,10 +25,13 @@ window.onload = function () {
   stickerCards.forEach(el => {
     el.addEventListener('click', (e) => {
       const target = e.target;
-      fetchToEditCard(el.dataset.stickerid);
 
-
-    }, true);
+      if (target.classList.contains("sticker-trash")) {
+        e.preventDefault();
+      } else {
+        fetchToEditCard(el.dataset.stickerid);
+      }
+    });
   });
   //---go to edit sticker card page
   function fetchToEditCard(id) {
@@ -128,7 +132,7 @@ window.onload = function () {
     let dataExercise = {};
 
     save.addEventListener('click', (e) => {
-      const exerciseBlocks= document.querySelectorAll('.exercise-block');
+      const exerciseBlocks = document.querySelectorAll('.exercise-block');
       const validStatusForAllInputs = document.querySelectorAll('.is-invalid');
       const header = document.querySelector('.add-header').value;
 

@@ -14,7 +14,7 @@ class My_sticker_service {
     };
   }
 
-  async my_sticker_page_edit({ id }, session) {
+  async my_sticker_page_edit_render({ id }, session) {
     const sticker = await Sticker_model.findOne({ _id: id, author: session.user._id });
     if (!sticker) return { result: false, message: "Sticker doesn't exist or you don't have access!" };
     return {
@@ -38,7 +38,7 @@ class My_sticker_service {
     };
   }
 
-  async my_stickers_page_post({ header, data, notes }, session) {
+  async my_stickers_page_create({ header, data, notes }, session) {
     if (!header) return { result: false, message: "Header can't be empty" };
     const new_sticker = new Sticker_model({
       header,
@@ -50,7 +50,7 @@ class My_sticker_service {
     return { result: true, message: `Sticker ${header} created!`, stickerId: new_sticker._id };
   }
 
-  async my_stickers_page_put({ header, data, notes }, { id }, session) {
+  async my_sticker_page_editing({ header, data, notes }, { id }, session) {
     if (!header) return { result: false, message: "Header can't be empty" };
     const edited_sticker = await Sticker_model.findOne({ _id: id, author: session.user._id });
     edited_sticker.header = header;

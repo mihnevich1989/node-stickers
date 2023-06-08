@@ -10,14 +10,14 @@ class My_sticker_controller {
     }
   }
 
-  async my_sticker_page_edit(req, res) {
+  async my_sticker_page_edit_render(req, res) {
     try {
-      const result_my_sticker_page_edit = await My_sticker_service.my_sticker_page_edit(req.query, req.session);
-      if (!result_my_sticker_page_edit.result) {
-        // req.flash("message", result_my_sticker_page_edited.message);
+      const result_my_sticker_page_edit_render = await My_sticker_service.my_sticker_page_edit_render(req.query, req.session);
+      if (!result_my_sticker_page_edit_render.result) {
+        // req.flash("message", result_my_sticker_page_edit_rendered.message);
         return res.status(404).json({ result: false, message: " can't open sticker" });
       }
-      return res.status(200).render("mystickers/edit-sticker", result_my_sticker_page_edit);
+      return res.status(200).render("mystickers/edit-sticker", result_my_sticker_page_edit_render);
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
@@ -32,32 +32,32 @@ class My_sticker_controller {
     }
   }
 
-  async my_stickers_page_post(req, res) {
+  async my_stickers_page_create(req, res) {
     try {
       console.log(req.body);
-      const result_my_stickers_page_post = await My_sticker_service.my_stickers_page_post(req.body, req.session);
-      if (!result_my_stickers_page_post.result) {
-        req.flash("message", result_my_stickers_page_post.message);
-        return res.status(409).json({ result: result_my_stickers_page_post.result, message: result_my_stickers_page_post.message });
+      const result_my_stickers_page_create = await My_sticker_service.my_stickers_page_create(req.body, req.session);
+      if (!result_my_stickers_page_create.result) {
+        req.flash("message", result_my_stickers_page_create.message);
+        return res.status(409).json({ result: result_my_stickers_page_create.result, message: result_my_stickers_page_create.message });
       }
 
-      req.flash("message", result_my_stickers_page_post.message);
-      // res.redirect(`/my-stickers/edit?id=${result_my_stickers_page_post.stickerId}`);
-      res.status(200).json({ result: result_my_stickers_page_post.result, message: result_my_stickers_page_post.message, path: '/my-stickers' });
+      req.flash("message", result_my_stickers_page_create.message);
+      // res.redirect(`/my-stickers/edit?id=${result_my_stickers_page_create.stickerId}`);
+      res.status(200).json({ result: result_my_stickers_page_create.result, message: result_my_stickers_page_create.message, path: '/my-stickers' });
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
   }
 
-  async my_stickers_page_put(req, res) {
+  async my_sticker_page_editing(req, res) {
     try {
-      const result_my_stickers_page_put = await My_sticker_service.my_stickers_page_put(req.body, req.query, req.session);
-      if (!result_my_stickers_page_put.result) {
-        req.flash("message", result_my_stickers_page_put.message);
-        return res.status(409).json({ result: result_my_stickers_page_put.result, message: result_my_stickers_page_put.message });
+      const result_my_sticker_page_editing = await My_sticker_service.my_sticker_page_editing(req.body, req.query, req.session);
+      if (!result_my_sticker_page_editing.result) {
+        req.flash("message", result_my_sticker_page_editing.message);
+        return res.status(409).json({ result: result_my_sticker_page_editing.result, message: result_my_sticker_page_editing.message });
       }
-      req.flash("message", result_my_stickers_page_put.message);
-      return res.redirect(`/my-stickers/edit?id=${result_my_stickers_page_put.stickerId}`);
+      req.flash("message", result_my_sticker_page_editing.message);
+      return res.redirect(`/my-stickers/edit?id=${result_my_sticker_page_editing.stickerId}`);
     } catch (error) {
       res.status(500).json({ error: error.message });
     }

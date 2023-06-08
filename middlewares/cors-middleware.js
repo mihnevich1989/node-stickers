@@ -4,7 +4,7 @@ module.exports = function (req, res, next) {
   res.header("Access-Control-Allow-Headers", "Content-Type");
   res.header(
     "Content-Security-Policy",
-    "script-src 'self' 'unsafe-inline'; object-src 'self'; img-src 'self' data:;"
+    "script-src 'self' 'unsafe-inline' 'unsafe-eval'; object-src 'self'; img-src 'self' data:;"
   );
   next();
 };
