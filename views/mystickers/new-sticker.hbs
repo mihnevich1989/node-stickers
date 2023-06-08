@@ -1,6 +1,8 @@
 <div class="data-group">
   <input type="text" aria-label="header" name="header" class="check-valid form-control add-header is-invalid mb-3"
     placeholder="Enter header" required>
+</div>
+<div class="exercise-block">
   <div class="input-group mb-1">
     <span class="input-group-text">Ex.</span>
     <input type="text" aria-label="exercise" name="exercise" class="check-valid form-control add-ex is-invalid"
@@ -12,20 +14,17 @@
       </span>
       <div class="input-group input-group-sm mb-1">
         <span class="input-group-text label-note">Note</span>
-        <input type="text" aria-label="note" name="note" class="check-valid form-control add-note is-invalid"
-          required>
+        <input type="text" aria-label="note" name="note" class="check-valid form-control add-note is-invalid" required>
       </div>
     </li> --}}
     <button type="button" class="btn btn-outline-secondary add-note border-0 bi bi-file-earmark-plus"></button>
   </ul>
 </div>
-
-<div class="btn-group m-5 btn-add-save-close" role="group">
+<div class="btn-group m-12 btn-add-save-close" role="group">
   <button id="add-exercise" type="button" class="btn btn-outline-primary">Add exercise</button>
   <button id="save-sticker" type="submit" class="btn btn-outline-success">Save sticker</button>
   <a href="/my-stickers" id="close-sticker" type="button" class="btn btn-outline-danger">Close</a>
 </div>
-
 {{!-- <div id="liveToast"
   class="w-50 toast align-items-center text-bg-danger position-absolute border-0 start-50 translate-middle-x "
   role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="1500">

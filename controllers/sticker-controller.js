@@ -10,14 +10,14 @@ class My_sticker_controller {
     }
   }
 
-  async my_sticker_page_edited(req, res) {
+  async my_sticker_page_edit(req, res) {
     try {
-      const result_my_sticker_page_edited = await My_sticker_service.my_sticker_page_edited(req.query, req.session);
-      if (!result_my_sticker_page_edited.result) {
-        req.flash("message", result_my_sticker_page_edited.message);
+      const result_my_sticker_page_edit = await My_sticker_service.my_sticker_page_edit(req.query, req.session);
+      if (!result_my_sticker_page_edit.result) {
+        // req.flash("message", result_my_sticker_page_edited.message);
         return res.status(404).json({ result: false, message: " can't open sticker" });
       }
-      return res.render("mystickers/edited-sticker", result_my_sticker_page_edited);
+      return res.status(200).render("mystickers/edit-sticker", result_my_sticker_page_edit);
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
@@ -72,7 +72,7 @@ class My_sticker_controller {
       }
       req.flash("message", result_my_sticker_page_delete.message);
       // res.redirect('/my-stickers');
-      return res.status(201).json({ result: result_my_sticker_page_delete.result, message: result_my_sticker_page_delete.message })
+      return res.status(201).json({ result: result_my_sticker_page_delete.result, message: result_my_sticker_page_delete.message });
     } catch (error) {
       res.status(500).json({ error: error.message });
 

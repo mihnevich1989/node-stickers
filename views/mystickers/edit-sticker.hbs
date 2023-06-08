@@ -1,0 +1,40 @@
+{{#if isSticker}}
+<div class="data-group">
+	<input type="text" aria-label="header" name="header" class="check-valid form-control add-header is-invalid mb-3"
+		placeholder="Enter header" value="{{header}}" required>
+</div>
+{{#each data}}
+<div class="exercise-block">
+	<div class="input-group mb-1">
+		<span class="input-group-text">Ex.</span>
+		<input type="text" aria-label="exercise" name="exercise" class="check-valid form-control add-ex is-invalid"
+			value="{{@key}}" required>
+	</div>
+	<ul class="list-note">
+		{{#if note.length}}
+		{{#each note}}
+		<li class="position-relative">
+			<span type="button" class='trash-minus btn btn-outline-secondary border-0 bi bi-file-earmark-minus'>
+			</span>
+			<div class="input-group input-group-sm mb-1">
+				<span class="input-group-text label-note">Note</span>
+				<input type="text" aria-label="note" name="note" class="check-valid form-control add-note is-invalid"
+					value="{{@this}}" required>
+			</div>
+		</li>
+		{{/each}}
+		{{/if}}
+		<button type="button" class="btn btn-outline-secondary add-note border-0 bi bi-file-earmark-plus"></button>
+	</ul>
+</div>
+{{/each}}
+<div class="btn-group m-12 btn-add-save-close" role="group">
+	<button id="add-exercise" type="button" class="btn btn-outline-primary">Add exercise</button>
+	<button id="save-sticker" type="submit" class="btn btn-outline-success">Save sticker</button>
+	<a href="/my-stickers" id="close-sticker" type="button" class="btn btn-outline-danger">Close</a>
+</div>
+{{else}}
+<div>
+	<p>Access denied!</p>
+</div>
+{{/if}}

@@ -13,12 +13,28 @@ window.onload = function () {
           return res.json();
         }).then(res => {
           if (res.result) {
-            target.parentElement.remove();  
+            target.parentElement.remove();
           }
         });
       });
     });
   };
+
+  const stickerCards = document.querySelectorAll('.sticker-card');
+  stickerCards.forEach(el => {
+    el.addEventListener('click', (e) => {
+      const target = e.target;
+      fetchToEditCard(el.dataset.stickerid);
+
+
+    }, true);
+  });
+  //---go to edit sticker card page
+  function fetchToEditCard(id) {
+    window.location.href = `/my-stickers/edit?id=${id}`;
+  }
+  //end---go to edit sticker card page
+
   //end---my-stickers page
 
   //---my-sticker/create
@@ -38,7 +54,7 @@ window.onload = function () {
     </li>`;
 
     const exercise = `
-    <div class="data-group">
+    <div class="exercise-block">
       <div class="input-group mb-1">
         <span class="input-group-text">Ex.</span>
         <input type="text" aria-label="exercise" name="exercise" class="check-valid form-control add-ex is-invalid" required>
@@ -46,7 +62,8 @@ window.onload = function () {
       <ul class="list-note">
         <button class="btn btn-outline-secondary add-note border-0 bi bi-file-earmark-plus"></button>
       </ul>
-    </div>`;
+    </div>
+    `;
 
     //---trash
     function trash() {
@@ -111,7 +128,7 @@ window.onload = function () {
     let dataExercise = {};
 
     save.addEventListener('click', (e) => {
-      const dataGroups = document.querySelectorAll('.data-group');
+      const exerciseBlocks= document.querySelectorAll('.exercise-block');
       const validStatusForAllInputs = document.querySelectorAll('.is-invalid');
       const header = document.querySelector('.add-header').value;
 
@@ -136,7 +153,7 @@ window.onload = function () {
         return;
       }
 
-      dataGroups.forEach((el, i) => {
+      exerciseBlocks.forEach((el, i) => {
         const exercise = el.querySelector('input[name="exercise"]').value;
         dataExercise[`${exercise} (${i + 1})`] = { note: [] };
         el.querySelectorAll('.list-note li .input-group').forEach(listElem => {

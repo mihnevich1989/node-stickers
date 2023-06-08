@@ -12,7 +12,7 @@ router.get('/create', My_sticker_controller.new_sticker_page_render)
 router.post('/create', My_sticker_controller.my_stickers_page_post)
 
 // TODO: sticker edit page render
-router.get('/edit', My_sticker_controller.my_sticker_page_edited)
+router.get('/edit', My_sticker_controller.my_sticker_page_edit)
 
 // TODO: edit sticker
 router.put('/edit', My_sticker_controller.my_stickers_page_put)

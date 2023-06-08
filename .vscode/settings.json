@@ -7,7 +7,7 @@
 	"editor.fontSize": 13,
 	"editor.letterSpacing": 1.2,
 	"editor.fontFamily": "Fira Code",
-	"editor.cursorSmoothCaretAnimation": true,
+	"editor.cursorSmoothCaretAnimation": "on",
 	"editor.cursorBlinking": "expand",
 	"editor.wordWrap": "on",
 	"editor.cursorStyle": "line"

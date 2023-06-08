@@ -5,8 +5,8 @@
 <div class="container grid text-center">
   {{#if stickers.length}}
   {{#each stickers}}
-  <div class="card text-bg-warning mb-3 sticker-card">
-    <span data-stickerid="{{id}}" type="button"
+  <div data-stickerid="{{id}}" class="card text-bg-warning mb-3 sticker-card">
+    <span {{!-- data-stickerid="{{id}}" --}} type="button"
       class='sticker-trash btn btn-outline-secondary border-0 bi bi-trash'></span>
     <h5 class="card-header">{{date}}</h5>
     <div class="card-body bg-light">

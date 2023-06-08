@@ -14,7 +14,7 @@ class My_sticker_service {
     };
   }
 
-  async my_sticker_page_edited({ id }, session) {
+  async my_sticker_page_edit({ id }, session) {
     const sticker = await Sticker_model.findOne({ _id: id, author: session.user._id });
     if (!sticker) return { result: false, message: "Sticker doesn't exist or you don't have access!" };
     return {
@@ -24,7 +24,6 @@ class My_sticker_service {
       stickerId: sticker._id,
       header: sticker.header,
       data: sticker.data,
-      notes: [...sticker.notes],
       date: moment(sticker.createdAt).format('LL'),
       isSticker: true
     };
