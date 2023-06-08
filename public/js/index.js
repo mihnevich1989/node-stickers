@@ -21,6 +21,7 @@ window.onload = function () {
     });
   };
 
+  //---go to edit sticker card page
   const stickerCards = document.querySelectorAll('.sticker-card');
   stickerCards.forEach(el => {
     el.addEventListener('click', (e) => {
@@ -33,12 +34,10 @@ window.onload = function () {
       }
     });
   });
-  //---go to edit sticker card page
   function fetchToEditCard(id) {
     window.location.href = `/my-stickers/edit?id=${id}`;
   }
   //end---go to edit sticker card page
-
   //end---my-stickers page
 
   //---my-sticker/create
@@ -188,7 +187,5 @@ window.onload = function () {
     //end---fetch
   }
   //end---my-sticker/create
-
-
 
 };
